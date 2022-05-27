@@ -1,0 +1,357 @@
+# MAIN GUIDELINES
+# * All metrics related to system resources are put under `system` as a root, this implies a merging of System with CPU, Disk, Network, Memory, etc.
+# * There wasn't (much) of a concern to keep the hierarhy/section levels to a minimum, logic was priortized against outcome
+# * Netdata Overview screen with in-section filter capabilites, as well as, better and easier Custom Dashboard creation/management features are considered to allow better UX
+# * POC was focused on doing some sections to proof the logic, System, Virtualization, ...
+# * OpenTelemety Metric Semantic Convetions were followed to the best of our understanding (even they seem to have different approaches in different domains) - https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/metrics/semantic_conventions/README.md
+#   - same metric attributes were purposefuly set as part of the context name to better present things to the user, e.g. system.cpu.core.utilization where `core` should be an attribute
+#
+# * Future ideas discussed outside of the scope of this work:
+#  - collectors should provide the following context of a metric (likely more, the gist is to provide a context):
+#    - applicable/default aggregation methods (e.g. no sense in SUM temperature|network interface duplex|any metric that represents encodes a state (0: running, 1: pending, 2: failed, etc.))
+#    - applicable/default grouping methods
+#    - key/main metrics, which should be shown per default and an element with (...) would allow user to expand --> user perference could override this
+
+System:
+  CPU:
+    utilization:
+    context:
+    softnet:
+    idlejitter:
+    softirqs:
+    interrupts:
+    device:
+      interrupts:
+    core:
+      utilization:
+      frequency:
+      softnet:
+      cstate_residency_time:
+      throttling:
+      softirqs:
+      device:
+        interrupts:
+  Memory:
+    ram:
+    available:
+    pgfaults:
+    oom_kill:
+    ksm:
+      deduplication:
+      savings:
+      effectiveness:
+  Storage:
+    physical_io:
+    memory_paged:
+    disk:
+      io:
+      busy_time:
+      utilization:
+      operations:
+        completed:
+        current:
+        merged:
+        backlog:
+        size:
+        io_time:
+        service_time:
+        await_time:
+      extended_ops:
+        discards:
+        merged:
+        operations:
+        size:
+        io_time:
+        await_time:
+    mountpoints:
+      space:
+        usage:
+      inodes:
+        usage:
+    filesystem:
+      zfs:
+      btrfs:
+      nfs:
+  Network:
+    physical_io:
+    io:
+    ipv4:
+      io:
+      packets:
+      errors:
+      tcp:
+      udp:
+      icmp:
+        packets:
+        errors:
+        type:
+          packets:
+    ipv6:
+      io:
+      packets:
+      errors:
+      tcp:
+      udp:
+      icmp:
+    sockets:
+    interface:
+      io:
+      packets:
+      drops:
+      operstate:
+      carrier:
+      speed:
+      duplex:
+      mtu:
+  Load:
+    average:
+    pressure:
+      cpu:
+      some:
+        share:
+        stall_time:
+      full:
+        share:
+        stall_time:
+      memory:
+        some:
+          share:
+          stall_time:
+        full:
+          share:
+          stall_time:
+      io:
+        some:
+          share:
+          stall_time:
+        full:
+          share:
+          stall_time:
+  IPC:
+    semaphore:
+      semaphores:
+        usage:
+      sets:
+        usage:
+    shared_memory:
+      segments:
+        usage:
+      size:
+        usage:
+    message_queue:
+      messages:
+        usage:
+      size:
+        usage:
+  Processes:
+    active:
+    forks:
+    runnable:
+    blocked:
+    state:
+  Entropy:
+  Clock:
+    sync:
+      state:
+      offset:
+    status:
+  Uptime:
+
+Systemd:
+  Services:
+    cpu:
+      utilization:
+    memory:
+      usage:
+    disk:
+      io:
+        read:
+        write:
+      operations:
+        read:
+        write:
+
+Processes:
+  Groups:
+    cpu:
+    memory:
+    swap:
+    disk:
+    network:
+  UserGroups:
+    cpu:
+    memory:
+    swap:
+    disk:
+    network:
+  Users:
+    cpu:
+    memory:
+    swap:
+    disk:
+    network:
+
+K8S:
+  kubelet:
+  kubeproxy:
+  kubestate:
+  containers:
+    cpu:
+      utilization:
+      usage:
+      pressure:
+        some:
+          share:
+          stall_time:
+        full:
+          share:
+          stall_time:
+      throttling:
+        quota:
+          utilization:
+        duration:
+    memory:
+      utilization:
+      usage:
+      pressure:
+        some:
+          share:
+          stall_time:
+        full:
+          share:
+          stall_time:
+      swap:
+      pgfaults:
+      writeback:
+      stats:
+    disk:
+      io:
+        pressure:
+          some:
+            share:
+            stall_time:
+          full:
+            share:
+            stall_time:
+    network:
+      interface:
+        io:
+        packets:
+        operstate:
+          mtu:
+
+Containers:
+  cpu:
+    utilization:
+    usage:
+    pressure:
+      some:
+        share:
+        stall_time:
+      full:
+        share:
+        stall_time:
+    throttling:
+      quota:
+        utilization:
+      duration:
+  memory:
+    utilization:
+    usage:
+    pressure:
+      some:
+        share:
+        stall_time:
+      full:
+        share:
+        stall_time:
+    swap:
+    pgfaults:
+    writeback:
+    stats:
+  disk:
+    io:
+      pressure:
+        some:
+          share:
+          stall_time:
+        full:
+          share:
+          stall_time:
+  network:
+    interface:
+      io:
+      packets:
+      operstate:
+      mtu:
+
+VMs:
+  cpu:
+    utilization:
+    usage:
+    pressure:
+      some:
+        share:
+        stall_time:
+      full:
+        share:
+        stall_time:
+    throttling:
+      quota:
+        utilization:
+      duration:
+  memory:
+    utilization:
+    usage:
+    pressure:
+      some:
+        share:
+        stall_time:
+      full:
+        share:
+        stall_time:
+    swap:
+    pgfaults:
+    writeback:
+    stats:
+  disk:
+    io:
+      pressure:
+        some:
+          share:
+          stall_time:
+        full:
+          share:
+          stall_time:
+  network:
+    interface:
+      io:
+      packets:
+      operstate:
+      mtu:
+
+Database:
+  MySQL:
+  Postgres:
+Web:
+  Apache:
+  Haproxy:
+  Nginx:
+
+Checks:
+  Web:
+  Port:
+  Files&Directories:
+  Fping:
+  WHOIS:
+  Certificates:
+  DNS:
+  IOPing:
+
+Hardware:
+  GPU:
+  CUPS:
+  Sensors:
+  UPS:
+
+SNMP:
