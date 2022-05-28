@@ -1,45 +1,35 @@
-# MAIN GUIDELINES
-# * All metrics related to system resources are put under `system` as a root, this implies a merging of System with CPU, Disk, Network, Memory, etc.
-# * There wasn't (much) of a concern to keep the hierarhy/section levels to a minimum, logic was priortized against outcome
-# * Netdata Overview screen with in-section filter capabilites, as well as, better and easier Custom Dashboard creation/management features are considered to allow better UX
-# * POC was focused on doing some sections to proof the logic, System, Virtualization, ...
-# * OpenTelemety Metric Semantic Convetions were followed to the best of our understanding (even they seem to have different approaches in different domains) - https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/metrics/semantic_conventions/README.md
-#   - same metric attributes were purposefuly set as part of the context name to better present things to the user, e.g. system.cpu.core.utilization where `core` should be an attribute
-#
-# * Future ideas discussed outside of the scope of this work:
-#  - collectors should provide the following context of a metric (likely more, the gist is to provide a context):
-#    - applicable/default aggregation methods (e.g. no sense in SUM temperature|network interface duplex|any metric that represents encodes a state (0: running, 1: pending, 2: failed, etc.))
-#    - applicable/default grouping methods
-#    - key/main metrics, which should be shown per default and an element with (...) would allow user to expand --> user perference could override this
-
 System:
   CPU:
-    utilization:
-    context:
-    softnet:
-    idlejitter:
-    softirqs:
-    interrupts:
-    device:
-      interrupts:
-    core:
+    Linux:
       utilization:
-      frequency:
+      context:
       softnet:
-      cstate_residency_time:
-      throttling:
+      idlejitter:
       softirqs:
+      interrupts:
       device:
         interrupts:
+      core:
+        utilization:
+        frequency:
+        softnet:
+        cstate_residency_time:
+        throttling:
+        softirqs:
+        device:
+          interrupts:
+    FreeBSD:
   Memory:
-    ram:
-    available:
-    pgfaults:
-    oom_kill:
-    ksm:
-      deduplication:
-      savings:
-      effectiveness:
+    Linux:
+      ram:
+      available:
+      pgfaults:
+      oom_kill:
+      ksm:
+        deduplication:
+        savings:
+        effectiveness:
+    FreeBS:
   Storage:
     physical_io:
     memory_paged:
@@ -157,6 +147,9 @@ System:
     status:
   Uptime:
 
+Remote monitoring:
+  Windows:
+
 Systemd:
   Services:
     cpu:
@@ -240,6 +233,11 @@ K8S:
         operstate:
           mtu:
 
+Docker:
+  docker_engine
+  dockerd
+  dockerhub
+
 Containers:
   cpu:
     utilization:
@@ -284,6 +282,12 @@ Containers:
       packets:
       operstate:
       mtu:
+
+vSphere:
+  vcsa
+  vsphere
+
+Xen/XCP:
 
 VMs:
   cpu:
@@ -331,12 +335,41 @@ VMs:
       mtu:
 
 Database:
+  ProxySQL:
+  CockroachDB:
+  Consul: <-- TO VERIFY
+  Couchbase:
+  CouchDB:
+  MongoDB:
   MySQL:
-  Postgres:
+  OracleDB:
+  Pika:
+  PostgreSQL:
+  Redis:
+  RethinkDB:
+  Riak KV:
+  Zookeeper: <-- TO VERIFY
+
+Messaging:
+  ActiveMQ:
+  Beanstalk: 
+  Apache Pulsar:
+  RabbitMQ:
+  VerneMQ:
+
 Web:
   Apache:
   Haproxy:
+  Lighttpd:
+  Lighttpd2:
+  LiteSpeed:
   Nginx:
+  PHP-FPM:
+  SpigotMC:
+  Squid:
+  Tengine:
+  Traefik:
+  Varnish Cache:
 
 Checks:
   Web:
@@ -346,12 +379,91 @@ Checks:
   WHOIS:
   Certificates:
   DNS:
+    DNS query 
+    DNS query RTT
   IOPing:
 
 Hardware:
   GPU:
   CUPS:
+  RAID: <-- TO VERIFY
+    Adaptec RAID:
+    HP Smart Storage Arrays: <-- TO VERIFY
+    MegaRAID controller:
+  S.M.A.R.T: <-- TO VERIFY
   Sensors:
   UPS:
 
+Logs:
+  Fluentd:
+  Logstash:
+  Squid web server logs: <-- TO VERIFY
+  Web server logs:
+  
 SNMP:
+
+Computing: <-- TO VERIFY
+  BOINC:
+  Gearman:
+
+Email:
+  Postfix:
+  Dovecot:
+  Exim:
+
+Process Control:
+  Monit
+  Supervisord
+
+Intrusion Prevention:
+  Fail2ban:
+
+Netdata Monitoring:
+---
+
+Uncategorized:
+  Provisioning:
+    puppet:
+  APM:
+    phpDaemon
+    uWSGI
+  Network:
+    Bind9
+    Chrony 
+    CoreDNS
+    DNSdist (GO)
+    Dnsmasq DHC
+    Dnsmasq DNS Forwarder
+    FreeRADIUS
+    Icecast
+    ISC BIND
+    ISC Bind (RNDC)
+    ISC DHCP
+    Libreswan
+    NSD 
+    NTP daemon
+    OpenLDAP
+    OpenSIPS
+    OpenVPN
+    Pi-hole 
+    PowerDNS (Python)
+    PowerDNS Authoritative Server (GO)
+    PowerDNS dnsdist (Python)
+    PowerDNS Recursor (GO)
+    RetroShare 
+    Tor 
+    Unbound 
+    Access points
+    fping.plugin
+    Netfilter - nfacct.plugin
+    Network QoS - tc.plugin
+    Network stack - proc.plugin
+    SYNPROXY - proc.plugin
+  Storage:
+    CEPH 
+    HDFS 
+    IPFS
+    Samba
+    ScaleIO 
+    Veritas Volume Manager
+
