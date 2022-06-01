@@ -1,4 +1,4 @@
-System:
+System:cd ..
   CPU:
     Linux:
       utilization:
@@ -62,6 +62,13 @@ System:
       zfs:
       btrfs:
       nfs:
+    HDFS: <-- TO CHANGE - this is application/product for distributed file system
+    S.M.A.R.T:
+    Veritas Volume Manager:
+    virtualization:
+      Adaptec RAID:
+      HP Smart Storage Arrays:
+      MegaRAID controller:
   Network:
     physical_io:
     io:
@@ -93,6 +100,7 @@ System:
       speed:
       duplex:
       mtu:
+    Network QoS - tc.plugin:
   Load:
     average:
     pressure:
@@ -337,7 +345,6 @@ VMs:
 Database:
   ProxySQL:
   CockroachDB:
-  Consul: <-- TO VERIFY
   Couchbase:
   CouchDB:
   MongoDB:
@@ -348,7 +355,6 @@ Database:
   Redis:
   RethinkDB:
   Riak KV:
-  Zookeeper: <-- TO VERIFY
 
 Messaging:
   ActiveMQ:
@@ -365,11 +371,28 @@ Web:
   LiteSpeed:
   Nginx:
   PHP-FPM:
+  phpDaemon:
   SpigotMC:
   Squid:
   Tengine:
   Traefik:
   Varnish Cache:
+  DNSdist:
+  Dnsmasq DHC:
+  ISC DHCP:
+  FreeRADIUS:
+  Icecast:
+  OpenSIPS:
+  RetroShare:
+  Tor:
+  Netfilter - nfacct.plugin:
+  SYNPROXY - proc.plugin:
+  Chrony:
+  NTP daemon:
+  uWSGI:
+  IPFS:
+  Samba:
+  ScaleIO:
 
 Checks:
   Web:
@@ -384,13 +407,11 @@ Checks:
   IOPing:
 
 Hardware:
+  Access points: <-- TO VERIFY
   GPU:
   CUPS:
-  RAID: <-- TO VERIFY
-    Adaptec RAID:
-    HP Smart Storage Arrays: <-- TO VERIFY
-    MegaRAID controller:
-  S.M.A.R.T: <-- TO VERIFY
+  CEPH:
+
   Sensors:
   UPS:
 
@@ -402,7 +423,28 @@ Logs:
   
 SNMP:
 
-Computing: <-- TO VERIFY
+DNS:
+  Bind9:
+  ISC BIND:
+  ISC Bind (RNDC):
+  CoreDNS:
+  Dnsmasq DNS Forwarder:
+  NSD:
+  Pi-hole:
+  PowerDNS:
+  PowerDNS Authoritative Server:
+  PowerDNS dnsdist:
+  PowerDNS Recursor:
+  Unbound:
+
+LDAP:
+  OpenLDAP:
+
+VPN:
+  Libreswan:
+  OpenVPN: 
+
+Computing:
   BOINC:
   Gearman:
 
@@ -411,9 +453,12 @@ Email:
   Dovecot:
   Exim:
 
-Process Control:
-  Monit
-  Supervisord
+Process and Provision Management:
+  Monit:
+  Supervisord:
+  puppet:
+  Consul:
+  Zookeeper:
 
 Intrusion Prevention:
   Fail2ban:
@@ -422,48 +467,4 @@ Netdata Monitoring:
 ---
 
 Uncategorized:
-  Provisioning:
-    puppet:
-  APM:
-    phpDaemon
-    uWSGI
-  Network:
-    Bind9
-    Chrony 
-    CoreDNS
-    DNSdist (GO)
-    Dnsmasq DHC
-    Dnsmasq DNS Forwarder
-    FreeRADIUS
-    Icecast
-    ISC BIND
-    ISC Bind (RNDC)
-    ISC DHCP
-    Libreswan
-    NSD 
-    NTP daemon
-    OpenLDAP
-    OpenSIPS
-    OpenVPN
-    Pi-hole 
-    PowerDNS (Python)
-    PowerDNS Authoritative Server (GO)
-    PowerDNS dnsdist (Python)
-    PowerDNS Recursor (GO)
-    RetroShare 
-    Tor 
-    Unbound 
-    Access points
-    fping.plugin
-    Netfilter - nfacct.plugin
-    Network QoS - tc.plugin
-    Network stack - proc.plugin
-    SYNPROXY - proc.plugin
-  Storage:
-    CEPH 
-    HDFS 
-    IPFS
-    Samba
-    ScaleIO 
-    Veritas Volume Manager
 
